@@ -74,7 +74,7 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
       try {
         await deleteProductCategory(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "Product deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -89,7 +89,7 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "Product not selected is missing",
         success: false,
       });
     }
@@ -104,8 +104,8 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
     productList == undefined
       ? []
       : Array.from(
-          new Set(productList.map((user) => user.subcategory.category.name))
-        );
+        new Set(productList.map((user) => user.subcategory.category.name))
+      );
 
   const subcategorySuggestions =
     productList == undefined
@@ -180,10 +180,28 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
           },
 
           {
-            accessorFn: (row) => `${row.createdAt}`,
+            accessorFn: (row) => new Date(row.createdAt),
             id: "createdAt",
-            header: "createdAt",
+            header: "Created At",
             size: 250,
+            Cell: ({ cell }) => {
+              const date = cell.getValue<Date>();
+              return date.toLocaleDateString("en-US"); // Format date to MM/DD/YYYY
+            },
+            Filter: ({ column }) => (
+              <Autocomplete
+                options={nameSuggestions}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Filter by Name"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+                onChange={(_event, value) => column.setFilterValue(value)}
+              />
+            ),
           },
         ],
       },
@@ -200,10 +218,10 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: 20,
         pageIndex: 0,
       },
       showGlobalFilter: true, // This should be true
@@ -312,7 +330,7 @@ const ProductListTable = ({ productList }: ProductListTableProps) => {
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteDepartment}
-          message={`Are you sure you want to delete product category ${selectedRowData?.id} :  ${selectedRowData?.name}?`}
+          message={`Are you sure you want to delete product  :  ${selectedRowData?.name}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

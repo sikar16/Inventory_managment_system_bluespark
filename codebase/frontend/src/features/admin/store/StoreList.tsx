@@ -13,7 +13,6 @@ const StoreList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllStoresQuery();
@@ -35,9 +34,7 @@ const StoreList = () => {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
+
 
   if (isUninitialized) {
     return <Loader />;
@@ -46,7 +43,7 @@ const StoreList = () => {
   if (isSuccess)
     return (
       <>
-        <p className="text-2xl font-semibold mb-3">Warehouse</p>
+        <p className="text-2xl font-semibold mb-3">Store</p>
         <div>
           <Box sx={{ position: "relative" }}>
             <Box

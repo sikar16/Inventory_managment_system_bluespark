@@ -15,7 +15,6 @@ const TemplateList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllTemplatesQuery();
@@ -37,9 +36,6 @@ const TemplateList = () => {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
 
   if (isUninitialized) {
     return <Loader />;

@@ -12,7 +12,6 @@ const Department_list = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllDepartmentQuery();
@@ -31,10 +30,6 @@ const Department_list = () => {
 
   if (isError) {
     return <div>{error.toString()}</div>;
-  }
-
-  if (isFetching) {
-    return <Loader />;
   }
 
   if (isUninitialized) {

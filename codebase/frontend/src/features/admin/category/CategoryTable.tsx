@@ -61,7 +61,7 @@ const ProductCategoryListTable = ({
       try {
         await deleteProductCategory({ params: selectedRowData?.id }).unwrap();
         setToastData({
-          message: "productCategory deleted successfully",
+          message: "Product category deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -76,7 +76,7 @@ const ProductCategoryListTable = ({
     } else {
       handleCloseDelete();
       setToastData({
-        message: "productCategory not selected is missing",
+        message: "Product category not selected is missing",
         success: false,
       });
     }
@@ -93,7 +93,7 @@ const ProductCategoryListTable = ({
     () => [
       {
         id: "productCategory",
-        header: "product category",
+        header: "Product category",
         columns: [
           {
             accessorFn: (row) => `${row.name}`,
@@ -130,7 +130,7 @@ const ProductCategoryListTable = ({
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,

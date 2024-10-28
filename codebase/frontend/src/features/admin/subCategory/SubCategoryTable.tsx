@@ -61,7 +61,7 @@ const ProductSubCategoryListTable = ({
       try {
         await deleteProductCategory(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "Sub-category deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -76,7 +76,7 @@ const ProductSubCategoryListTable = ({
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "Sub-category not selected is missing",
         success: false,
       });
     }
@@ -148,10 +148,10 @@ const ProductSubCategoryListTable = ({
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: 20,
         pageIndex: 0,
       },
       showGlobalFilter: true, // This should be true

@@ -90,7 +90,7 @@ const DepartmentListTable = ({ departmentList }: DepartmentListTableProps) => {
     () => [
       {
         id: "department",
-        header: "department",
+        header: "Department",
         columns: [
           {
             accessorFn: (row) => `${row.name}`,
@@ -127,7 +127,7 @@ const DepartmentListTable = ({ departmentList }: DepartmentListTableProps) => {
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,

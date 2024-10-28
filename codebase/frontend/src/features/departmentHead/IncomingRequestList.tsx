@@ -9,7 +9,6 @@ export default function InComingRequestsList() {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllMaterialReqByDepartmentHeadQuery();
@@ -19,10 +18,6 @@ export default function InComingRequestsList() {
 
   if (isError) {
     return <div>{error.toString()}</div>;
-  }
-
-  if (isFetching) {
-    return <Loader />;
   }
 
   if (isUninitialized) {

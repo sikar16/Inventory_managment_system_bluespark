@@ -13,7 +13,6 @@ const SuppliersList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllSupplierQuery();
@@ -35,9 +34,7 @@ const SuppliersList = () => {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
+
 
   if (isUninitialized) {
     return <Loader />;
@@ -60,7 +57,7 @@ const SuppliersList = () => {
               }}
             >
               <RectangularButton type="primary" onClick={handleClickOpen}>
-                <p className="px-2">Add Supplayer</p>
+                <p className="px-2">Add Supplaier</p>
               </RectangularButton>
             </Box>
           </Box>

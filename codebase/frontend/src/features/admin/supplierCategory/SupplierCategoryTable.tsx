@@ -61,7 +61,7 @@ const SupplierCategoryListTable = ({
       try {
         await deleteSupplierCategory(selectedRowData.id).unwrap();
         setToastData({
-          message: "Supplayer Category deleted successfully",
+          message: "Supplier Category deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -76,7 +76,7 @@ const SupplierCategoryListTable = ({
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Supplayer Category not selected is missing",
+        message: "Supplaier Category not selected is missing",
         success: false,
       });
     }
@@ -93,7 +93,7 @@ const SupplierCategoryListTable = ({
     () => [
       {
         id: "Supplayer category",
-        header: "Supplayer category",
+        header: "Supplier category",
         columns: [
           {
             accessorFn: (row) => `${row.name}`,
@@ -130,7 +130,7 @@ const SupplierCategoryListTable = ({
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,
@@ -228,7 +228,7 @@ const SupplierCategoryListTable = ({
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteDepartment}
-          message={`Are you sure you want to delete product category ${selectedRowData?.id} :  ${selectedRowData?.name}?`}
+          message={`Are you sure you want to delete supplier category :  ${selectedRowData?.name}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

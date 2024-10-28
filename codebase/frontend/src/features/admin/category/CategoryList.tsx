@@ -13,7 +13,6 @@ const CategoryList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllProductCategoryQuery();
@@ -32,10 +31,6 @@ const CategoryList = () => {
 
   if (isError) {
     return <div>{error.toString()}</div>;
-  }
-
-  if (isFetching) {
-    return <Loader />;
   }
 
   if (isUninitialized) {

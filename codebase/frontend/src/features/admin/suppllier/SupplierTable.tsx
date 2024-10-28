@@ -72,7 +72,7 @@ const SupplayerListTable = ({ supplayerList }: SupplayerListTableProps) => {
       try {
         await deleteProductCategory(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "Supplier deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -87,7 +87,7 @@ const SupplayerListTable = ({ supplayerList }: SupplayerListTableProps) => {
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "Supplier not selected is missing",
         success: false,
       });
     }
@@ -102,7 +102,7 @@ const SupplayerListTable = ({ supplayerList }: SupplayerListTableProps) => {
     () => [
       {
         id: "sub category",
-        header: "Sub Category",
+        header: "Supplier",
         columns: [
           {
             accessorFn: (row) => `${row.fullName}`,
@@ -159,7 +159,7 @@ const SupplayerListTable = ({ supplayerList }: SupplayerListTableProps) => {
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 5,
@@ -271,7 +271,7 @@ const SupplayerListTable = ({ supplayerList }: SupplayerListTableProps) => {
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteDepartment}
-          message={`Are you sure you want to delete product category ${selectedRowData?.id} :  ${selectedRowData?.fullName}?`}
+          message={`Are you sure you want to delete supplier:  ${selectedRowData?.fullName}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

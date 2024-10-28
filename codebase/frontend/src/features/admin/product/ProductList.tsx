@@ -14,7 +14,6 @@ const ProductList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllProductsQuery();
@@ -35,9 +34,6 @@ const ProductList = () => {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
 
   if (isUninitialized) {
     return <Loader />;

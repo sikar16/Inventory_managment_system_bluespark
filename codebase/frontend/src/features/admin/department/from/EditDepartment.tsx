@@ -40,7 +40,7 @@ const EditDepartment: React.FC<EditDepartmentProps> = ({
           params: selectedRowData?.id,
         }).unwrap();
         setToastData({
-          message: "Department created successfully",
+          message: "Department update successfully",
           success: true,
         });
         handleClickClose();
@@ -95,7 +95,7 @@ const EditDepartment: React.FC<EditDepartmentProps> = ({
             disabled={isLoading}
             className="bg-[#002a47] py-1 px-3 text-white rounded-md mt-4"
           >
-            {isLoading ? "update..." : "update Department"}
+            {isLoading ? "updateing..." : "update Department"}
           </button>
         </form>
       </div>

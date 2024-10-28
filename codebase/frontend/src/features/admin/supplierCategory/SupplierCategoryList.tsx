@@ -12,7 +12,6 @@ const SupplierCategoryList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllSupplierCategoryQuery();
@@ -31,10 +30,6 @@ const SupplierCategoryList = () => {
 
   if (isError) {
     return <div>{error.toString()}</div>;
-  }
-
-  if (isFetching) {
-    return <Loader />;
   }
 
   if (isUninitialized) {
@@ -58,7 +53,7 @@ const SupplierCategoryList = () => {
               }}
             >
               <RectangularButton type="primary" onClick={handleClickOpen}>
-                <p className="px-2">Add Category</p>
+                <p className="px-2">Add Supplier Category</p>
               </RectangularButton>
             </Box>
           </Box>

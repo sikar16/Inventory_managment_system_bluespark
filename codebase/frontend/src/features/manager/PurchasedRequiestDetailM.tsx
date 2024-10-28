@@ -29,7 +29,7 @@ const PurchasedRequestDetailM: React.FC = () => {
   const [orderPo] = useAddNewpurchasedOrderMutation();
   const location = useLocation();
   const { id } = location.state || {};
-  const { isGM } = useAuth();
+  const { isGM, isLS } = useAuth();
   const { setToastData } = useToast();
 
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
@@ -128,14 +128,14 @@ const PurchasedRequestDetailM: React.FC = () => {
                     {column.id === "no"
                       ? rowIndex + 1
                       : column.id === "product"
-                      ? row.products.name
-                      : column.id === "subCategory"
-                      ? row.products.subcategoryId
-                      : column.id === "quantity"
-                      ? row.quantityToBePurchased
-                      : column.id === "remark"
-                      ? row.remark
-                      : ""}
+                        ? row.products.name
+                        : column.id === "subCategory"
+                          ? row.products.subcategoryId
+                          : column.id === "quantity"
+                            ? row.quantityToBePurchased
+                            : column.id === "remark"
+                              ? row.remark
+                              : ""}
                   </td>
                 ))}
                 <td className="p-2">
@@ -227,33 +227,32 @@ const PurchasedRequestDetailM: React.FC = () => {
       {isGM && (
         <div className="p-6">
           <button
-            className={`px-5 py-2 text-white rounded-lg ${
-              purchasedReq?.isApproviedByGM ? "bg-red-500" : "bg-green-400"
-            }`}
+            className={`px-5 py-2 text-white rounded-lg ${purchasedReq?.isApproviedByGM ? "bg-red-500" : "bg-green-400"
+              }`}
             onClick={handleApprove}
           >
             {purchasedReq?.isApproviedByGM ? "Reject" : "Approve"}
           </button>
         </div>
       )}
-
-      <div>
-        <div className="flex justify-center mt-2">
-          {isLoading ? (
-            <div>Approving...</div>
-          ) : (
-            <button
-              type="button"
-              onClick={handleOpenDialog2}
-              className={`${"bg-green-800"} text-white px-6 py-2 rounded-md`}
-              disabled={isLoading}
-            >
-              convert to Po
-            </button>
-          )}
-        </div>
-      </div>
-
+      {isLS ?
+        <div>
+          <div className="flex justify-center mt-2">
+            {isLoading ? (
+              <div>Approving...</div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleOpenDialog2}
+                className={`${"bg-green-800"} text-white px-6 py-2 rounded-md`}
+                disabled={isLoading}
+              >
+                convert to Po
+              </button>
+            )}
+          </div>
+        </div> : ""
+      }
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}

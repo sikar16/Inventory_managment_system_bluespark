@@ -13,7 +13,6 @@ const SubCategoryList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllProductSubCategoryQuery();
@@ -32,10 +31,6 @@ const SubCategoryList = () => {
 
   if (isError) {
     return <div>{error.toString()}</div>;
-  }
-
-  if (isFetching) {
-    return <Loader />;
   }
 
   if (isUninitialized) {

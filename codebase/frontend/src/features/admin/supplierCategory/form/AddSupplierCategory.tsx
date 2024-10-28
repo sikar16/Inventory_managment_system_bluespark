@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import { useAddNewSupplierCategoryMutation } from "../../../../services/supplierCategoryService";
+import { useToast } from "../../../../context/ToastContext";
 
 interface AddSupplierProps {
   handleCloseDialog: () => void;
@@ -12,7 +13,9 @@ const AddSupplierCategory: React.FC<AddSupplierProps> = ({
   handleCloseDialog,
 }) => {
   const [customCategory, setCustomCategory] = useState("");
-  const [addCategory, { isSuccess }] = useAddNewSupplierCategoryMutation();
+  const [addCategory, { isSuccess, isLoading }] = useAddNewSupplierCategoryMutation();
+  const { setToastData } = useToast()
+
 
   const handleCustomCategoryChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -28,7 +31,20 @@ const AddSupplierCategory: React.FC<AddSupplierProps> = ({
     };
 
     console.log(formData);
-    await addCategory({ data: formData }); // Await the mutation call
+    try {
+      await addCategory({ data: formData }); // Await the mutation call
+      setToastData({
+        message: "Supplier category added successfully",
+        success: true,
+      });
+    } catch (error) {
+      setToastData({
+        message: "Supplier category could not add",
+        success: false,
+      });
+      console.log(error)
+    }
+
   };
 
   if (isSuccess) handleCloseDialog(); // Close dialog on success
@@ -61,7 +77,7 @@ const AddSupplierCategory: React.FC<AddSupplierProps> = ({
               type="submit" // Set button type to submit
               className="bg-[#002a47] text-white px-2 rounded-md"
             >
-              Add Category
+              {isLoading ? "Adding" : "Add Category"}
             </button>
           </div>
         </div>

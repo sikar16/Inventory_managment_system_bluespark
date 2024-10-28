@@ -71,7 +71,7 @@ const Header = () => {
                 <div className='flex gap-3 me-5 align-middle items-center '>
                     <div className="flex justify-center gap-10 me-6">
                         <Link to='/'>Home</Link>
-                        <Link to='/employee/requests-list' onClick={() => handleToggleView('requests')}>Setting</Link>
+                        <Link to='/employee/requests-list' onClick={() => handleToggleView('requests')}>Requests </Link>
                     </div>
                     <IconContainer
                         handler={toggleThemeData}

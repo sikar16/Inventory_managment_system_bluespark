@@ -58,7 +58,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
       try {
         await deleteUser(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "User deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -73,7 +73,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "User not selected is missing",
         success: false,
       });
     }
@@ -89,12 +89,12 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
     () => [
       {
         id: "users",
-        header: "users",
+        header: "Users",
         columns: [
           {
             accessorFn: (row) => `${row.profile.firstName}`,
             id: "firstName",
-            header: "firstName",
+            header: "FirstName",
             size: 250,
             Filter: ({ column }) => (
               <Autocomplete
@@ -114,27 +114,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
           {
             accessorFn: (row) => `${row.profile.middleName}`,
             id: "middleName",
-            header: "middleName",
-            size: 250,
-            Filter: ({ column }) => (
-              <Autocomplete
-                options={nameSuggestions}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Filter by Name"
-                    variant="outlined"
-                    size="small"
-                  />
-                )}
-                onChange={(_event, value) => column.setFilterValue(value)}
-              />
-            ),
-          },
-          {
-            accessorFn: (row) => `${row.email}`,
-            id: "email",
-            header: "email",
+            header: "MiddleName",
             size: 250,
             Filter: ({ column }) => (
               <Autocomplete
@@ -154,7 +134,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
           {
             accessorFn: (row) => `${row.profile.lastName}`,
             id: "lastName",
-            header: "lastName",
+            header: "LastName",
             size: 250,
             Filter: ({ column }) => (
               <Autocomplete
@@ -172,99 +152,111 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
             ),
           },
           {
-            id: "details",
-            header: "Details",
-            columns: [
-              {
-                accessorKey: "role",
-                header: "Role",
-                size: 200,
-                Cell: ({ cell }) => {
-                  const role = cell.getValue<string>(); // Get the role value
+            accessorFn: (row) => `${row.email}`,
+            id: "email",
+            header: "Email",
+            size: 250,
+            Filter: ({ column }) => (
+              <Autocomplete
+                options={nameSuggestions}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Filter by Name"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+                onChange={(_event, value) => column.setFilterValue(value)}
+              />
+            ),
+          },
 
-                  // Set the background color based on the role
-                  let backgroundColor;
-                  switch (role) {
-                    case "super_admin":
-                      backgroundColor = "#d32f2f"; // Red for super admin
-                      break;
-                    case "DEPARTMENT_HEAD":
-                      backgroundColor = "#1976d2"; // Blue for department head
-                      break;
-                    case "EMPLOYEE":
-                      backgroundColor = "#4caf50"; // Green for employee
-                      break;
-                    case "ADMIN":
-                      backgroundColor = "#ff9800"; // Orange for admin
-                      break;
-                    case "LOGISTIC_SUPERVISOR":
-                      backgroundColor = "#3f51b5"; // Indigo for logistic supervisor
-                      break;
-                    case "FINANCE":
-                      backgroundColor = "#9c27b0"; // Purple for finance
-                      break;
-                    case "GENERAL_MANAGER":
-                      backgroundColor = "#f44336"; // Red for general manager
-                      break;
-                    case "STORE_KEEPER":
-                      backgroundColor = "#e91e63"; // Pink for store keeper
-                      break;
-                    default:
-                      backgroundColor = "#9e9e9e"; // Grey for fallback
-                  }
+          {
+            accessorKey: "role",
+            header: "Role",
+            size: 200,
+            Cell: ({ cell }) => {
+              const role = cell.getValue<string>(); // Get the role value
 
+              // Set the background color based on the role
+              let backgroundColor;
+              switch (role) {
+                case "super_admin":
+                  backgroundColor = "#d32f2f"; // Red for super admin
+                  break;
+                case "DEPARTMENT_HEAD":
+                  backgroundColor = "#1976d2"; // Blue for department head
+                  break;
+                case "EMPLOYEE":
+                  backgroundColor = "#4caf50"; // Green for employee
+                  break;
+                case "ADMIN":
+                  backgroundColor = "#ff9800"; // Orange for admin
+                  break;
+                case "LOGISTIC_SUPERVISOR":
+                  backgroundColor = "#3f51b5"; // Indigo for logistic supervisor
+                  break;
+                case "FINANCE":
+                  backgroundColor = "#9c27b0"; // Purple for finance
                   return (
                     <Box
                       component="span"
                       sx={{
-                        backgroundColor: backgroundColor, // Use the defined background color
+                        backgroundColor: backgroundColor,
                         borderRadius: "0.25rem",
                         color: "#fff",
                         maxWidth: "9ch",
                         p: "0.25rem",
                       }}
                     >
-                      {role}
+                      Finance Head
                     </Box>
-                  );
-                },
-                Filter: ({ column }) => (
-                  <Autocomplete
-                    options={roleSuggestions}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Filter by Role"
-                        variant="outlined"
-                        size="small"
-                      />
-                    )}
-                    onChange={(_event, value) => column.setFilterValue(value)}
+                  ); // Return "Finance Head" for the FINANCE role
+                case "GENERAL_MANAGER":
+                  backgroundColor = "#f44336"; // Red for general manager
+                  break;
+                case "STORE_KEEPER":
+                  backgroundColor = "#e91e63"; // Pink for store keeper
+                  break;
+                default:
+                  backgroundColor = "#9e009e"; // Grey for fallback
+              }
+
+              return (
+                <Box
+                  component="span"
+                  sx={{
+                    backgroundColor: backgroundColor, // Use the defined background color
+                    borderRadius: "0.25rem",
+                    color: "#fff",
+                    maxWidth: "9ch",
+                    p: "0.25rem",
+                  }}
+                >
+                  {role} {/* Display the role name for all other cases */}
+                </Box>
+              );
+            },
+            Filter: ({ column }) => (
+              <Autocomplete
+                options={roleSuggestions}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Filter by Role"
+                    variant="outlined"
+                    size="small"
                   />
-                ),
-              },
-              {
-                accessorFn: (row) => new Date(row.createdAt),
-                id: "createdAt",
-                header: "Created At",
-                filterVariant: "date",
-                sortingFn: "datetime",
-                Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(),
-              },
-              {
-                accessorFn: (row) => new Date(row.createdAt),
-                id: "updatedAt",
-                header: "Updated At",
-                filterVariant: "date",
-                sortingFn: "datetime",
-                Cell: ({ cell }) => cell.getValue<Date>()?.toLocaleDateString(),
-              },
-            ],
+                )}
+                onChange={(_event, value) => column.setFilterValue(value)}
+              />
+            ),
           },
           {
             accessorFn: (row) => `${row.department.name}`,
             id: "department",
-            header: "department",
+            header: "Department",
             size: 250,
             Filter: ({ column }) => (
               <Autocomplete
@@ -296,7 +288,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,
@@ -396,7 +388,7 @@ const UsersListTable = ({ userList }: UsersListTableProps) => {
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteUser}
-          message={`Are you sure you want to delete user :  ${selectedRowData?.profile.firstName}?`}
+          message={`Are you sure you want to delete user :  ${selectedRowData?.profile.firstName} ${selectedRowData?.profile.middleName}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

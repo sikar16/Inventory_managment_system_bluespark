@@ -35,14 +35,10 @@ const IncomingMaterialRequestListTable = ({
     useState<MaterialRequest_type | null>(null);
   const [deleteMaterialRequest, { isLoading, isSuccess }] =
     useDeleteMaterialReqMutation();
-  const [openEdit, setOpenEdit] = useState(false);
+  // const [openEdit, setOpenEdit] = useState(false);
   const [openReset] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
-  const handleClickOpenEdit = (row: MaterialRequest_type) => {
-    setSelectedRowData(row);
-    setOpenEdit(true);
-  };
 
   const handleClickOpenDelete = (row: MaterialRequest_type) => {
     setSelectedRowData(row);
@@ -101,7 +97,7 @@ const IncomingMaterialRequestListTable = ({
   const departmentSuggestions = [
     ...new Set(
       materialRequestList?.map((req) => req.departmentHead?.department.name) ||
-        []
+      []
     ),
   ];
 
@@ -259,7 +255,7 @@ const IncomingMaterialRequestListTable = ({
         key={`view-${row.original.id}`}
         onClick={() => {
           closeMenu();
-          navigate("/employee/requests-Detaile", {
+          navigate("/logestics/requests-Detaile", {
             state: { id: row.original.id },
           });
         }}
@@ -270,19 +266,7 @@ const IncomingMaterialRequestListTable = ({
         </ListItemIcon>
         View
       </MenuItem>,
-      <MenuItem
-        key={`edit-${row.original.id}`}
-        onClick={() => {
-          handleClickOpenEdit(row.original);
-          closeMenu();
-        }}
-        sx={{ m: 0 }}
-      >
-        <ListItemIcon>
-          <PersonAddIcon />
-        </ListItemIcon>
-        Edit
-      </MenuItem>,
+
       <MenuItem
         key={`delete-${row.original.id}`}
         onClick={() => {
@@ -330,12 +314,12 @@ const IncomingMaterialRequestListTable = ({
   return (
     <Box>
       <MaterialReactTable table={table} />
-      <Dialog open={openEdit}>
-        {/* <UpdateMaterialRequest
+      {/* <Dialog open={openEdit}>
+        <UpdateMaterialRequest
           handleCloseDialog={handleCloseEdit}
           selectedRowData={selectedRowData}
-        /> */}
-      </Dialog>
+        /> 
+      </Dialog>*/}
       <Dialog open={openReset}></Dialog>
       <Dialog open={openDelete}>
         <Warning

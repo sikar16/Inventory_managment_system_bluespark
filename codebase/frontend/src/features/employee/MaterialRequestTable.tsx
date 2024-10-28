@@ -35,14 +35,13 @@ const MaterialRequestListTable = ({
     useState<MaterialRequest_type | null>(null);
   const [deleteMaterialRequest, { isLoading, isSuccess }] =
     useDeleteMaterialReqMutation();
-  const [openEdit, setOpenEdit] = useState(false);
   const [openReset] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
-  const handleClickOpenEdit = (row: MaterialRequest_type) => {
-    setSelectedRowData(row);
-    setOpenEdit(true);
-  };
+  // const handleClickOpenEdit = (row: MaterialRequest_type) => {
+  //   setSelectedRowData(row);
+  //   setOpenEdit(true);
+  // };
 
   const handleClickOpenDelete = (row: MaterialRequest_type) => {
     setSelectedRowData(row);
@@ -101,7 +100,7 @@ const MaterialRequestListTable = ({
   const departmentSuggestions = [
     ...new Set(
       materialRequestList?.map((req) => req.departmentHead?.department.name) ||
-        []
+      []
     ),
   ];
 
@@ -230,7 +229,7 @@ const MaterialRequestListTable = ({
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,
@@ -270,19 +269,19 @@ const MaterialRequestListTable = ({
         </ListItemIcon>
         View
       </MenuItem>,
-      <MenuItem
-        key={`edit-${row.original.id}`}
-        onClick={() => {
-          handleClickOpenEdit(row.original);
-          closeMenu();
-        }}
-        sx={{ m: 0 }}
-      >
-        <ListItemIcon>
-          <PersonAddIcon />
-        </ListItemIcon>
-        Edit
-      </MenuItem>,
+      // <MenuItem
+      //   key={`edit-${row.original.id}`}
+      //   onClick={() => {
+      //     handleClickOpenEdit(row.original);
+      //     closeMenu();
+      //   }}
+      //   sx={{ m: 0 }}
+      // >
+      //   <ListItemIcon>
+      //     <PersonAddIcon />
+      //   </ListItemIcon>
+      //   Edit
+      // </MenuItem>,
       <MenuItem
         key={`delete-${row.original.id}`}
         onClick={() => {
@@ -330,12 +329,12 @@ const MaterialRequestListTable = ({
   return (
     <Box>
       <MaterialReactTable table={table} />
-      <Dialog open={openEdit}>
-        {/* <UpdateMaterialRequest
+      {/*  <Dialog open={openEdit}>
+        <UpdateMaterialRequest
           handleCloseDialog={handleCloseEdit}
           selectedRowData={selectedRowData}
-        /> */}
-      </Dialog>
+        /> 
+      </Dialog>*/}
       <Dialog open={openReset}></Dialog>
       <Dialog open={openDelete}>
         <Warning

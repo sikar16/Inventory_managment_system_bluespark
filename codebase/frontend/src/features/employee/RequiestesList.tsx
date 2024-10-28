@@ -11,7 +11,6 @@ export default function RequestsList() {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllMyMaterialReqQuery();
@@ -49,9 +48,6 @@ export default function RequestsList() {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
 
   if (isUninitialized) {
     return <Loader />;
@@ -71,41 +67,36 @@ export default function RequestsList() {
 
         <div className="flex gap-8 text-gray-400 mt-8 mb-1">
           <button
-            className={`hover:underline hover:text-black ${
-              selectedStatus === "ALL" ? "underline text-black" : ""
-            }`}
+            className={`hover:underline hover:text-black ${selectedStatus === "ALL" ? "underline text-black" : ""
+              }`}
             onClick={() => setSelectedStatus("ALL")}
           >
             All requests
           </button>
           <button
-            className={`hover:underline hover:text-black ${
-              selectedStatus === "REQUESTED" ? "underline text-black" : ""
-            }`}
+            className={`hover:underline hover:text-black ${selectedStatus === "REQUESTED" ? "underline text-black" : ""
+              }`}
             onClick={() => setSelectedStatus("REQUESTED")}
           >
             Requested
           </button>
           <button
-            className={`hover:underline hover:text-black ${
-              selectedStatus === "PENDING" ? "underline text-black" : ""
-            }`}
+            className={`hover:underline hover:text-black ${selectedStatus === "PENDING" ? "underline text-black" : ""
+              }`}
             onClick={() => setSelectedStatus("PENDING")}
           >
             Pending
           </button>
           <button
-            className={`hover:underline hover:text-black ${
-              selectedStatus === "REJECTED" ? "underline text-black" : ""
-            }`}
+            className={`hover:underline hover:text-black ${selectedStatus === "REJECTED" ? "underline text-black" : ""
+              }`}
             onClick={() => setSelectedStatus("REJECTED")}
           >
             Rejected
           </button>
           <button
-            className={`hover:underline hover:text-black ${
-              selectedStatus === "AVAILABLE" ? "underline text-black" : ""
-            }`}
+            className={`hover:underline hover:text-black ${selectedStatus === "AVAILABLE" ? "underline text-black" : ""
+              }`}
             onClick={() => setSelectedStatus("AVAILABLE")}
           >
             Available

@@ -15,7 +15,7 @@ const UpdateSupplierCategory: React.FC<UpdateSupplierCategoryProps> = ({
   selectedCategory,
 }) => {
   const [customCategory, setCustomCategory] = useState("");
-  const [updateCategory, { isSuccess }] = useUpdateSupplierCategoryMutation();
+  const [updateCategory, { isSuccess, isLoading }] = useUpdateSupplierCategoryMutation();
 
   useEffect(() => {
     // Set the initial value for customCategory when selectedCategory changes
@@ -40,6 +40,7 @@ const UpdateSupplierCategory: React.FC<UpdateSupplierCategoryProps> = ({
         await updateCategory({
           id: selectedCategory.id,
           data: formData,
+
         }).unwrap();
       } catch (error) {
         console.error("Failed to update category:", error);
@@ -77,7 +78,7 @@ const UpdateSupplierCategory: React.FC<UpdateSupplierCategoryProps> = ({
               onClick={handleUpdateCategory}
               disabled={!customCategory} // Disable if input is empty
             >
-              Update Category
+              {isLoading ? "Updating" : "Update supplier category"}
             </button>
           </div>
         </div>

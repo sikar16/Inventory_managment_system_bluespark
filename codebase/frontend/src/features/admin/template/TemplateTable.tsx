@@ -4,6 +4,7 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
+
 import {
   Box,
   Dialog,
@@ -82,7 +83,7 @@ const TemplateListTable = ({
       try {
         await deleteTemplate(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "Template deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -96,7 +97,7 @@ const TemplateListTable = ({
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "Template not selected is missing",
         success: false,
       });
     }
@@ -111,7 +112,7 @@ const TemplateListTable = ({
     () => [
       {
         id: "template",
-        header: "template",
+        header: "Template",
         columns: [
           {
             accessorFn: (row) => `${row.name}`,
@@ -134,10 +135,14 @@ const TemplateListTable = ({
             ),
           },
           {
-            accessorFn: (row) => `${row.createdAt}`,
+            accessorFn: (row) => new Date(row.createdAt),
             id: "createdAt",
-            header: "createdAt",
+            header: "Created At",
             size: 250,
+            Cell: ({ cell }) => {
+              const date = cell.getValue<Date>();
+              return date.toLocaleDateString("en-US"); // Format date to MM/DD/YYYY
+            },
             Filter: ({ column }) => (
               <Autocomplete
                 options={nameSuggestions}
@@ -168,7 +173,7 @@ const TemplateListTable = ({
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 5,
@@ -280,7 +285,7 @@ const TemplateListTable = ({
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteDepartment}
-          message={`Are you sure you want to delete product category ${selectedRowData?.id} :  ${selectedRowData?.name}?`}
+          message={`Are you sure you want to delete template ${selectedRowData?.id} :  ${selectedRowData?.name}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

@@ -70,7 +70,7 @@ const StoreListTable = ({ stores }: StoreListTableProps) => {
       try {
         await deleteStore(selectedRowData.id).unwrap();
         setToastData({
-          message: "Department deleted successfully",
+          message: "Store deleted successfully",
           success: true,
         });
         handleCloseDelete();
@@ -85,7 +85,7 @@ const StoreListTable = ({ stores }: StoreListTableProps) => {
     } else {
       handleCloseDelete();
       setToastData({
-        message: "Department not selected is missing",
+        message: "Store not selected is missing",
         success: false,
       });
     }
@@ -100,7 +100,7 @@ const StoreListTable = ({ stores }: StoreListTableProps) => {
     () => [
       {
         id: "department",
-        header: "department",
+        header: "Store",
         columns: [
           {
             accessorFn: (row) => `${row.name}`,
@@ -137,7 +137,7 @@ const StoreListTable = ({ stores }: StoreListTableProps) => {
     enableColumnPinning: true,
     enableFacetedValues: true,
     enableRowActions: true,
-    enableRowSelection: true,
+    enableRowSelection: false,
     initialState: {
       pagination: {
         pageSize: 20,
@@ -249,7 +249,7 @@ const StoreListTable = ({ stores }: StoreListTableProps) => {
         <Warning
           handleClose={handleCloseDelete}
           handleAction={handleDeleteDepartment}
-          message={`Are you sure you want to delete store ${selectedRowData?.id} :  ${selectedRowData?.name}?`}
+          message={`Are you sure you want to delete store :  ${selectedRowData?.name}?`}
           isLoading={isLoading}
           isSuccess={isSuccess}
         />

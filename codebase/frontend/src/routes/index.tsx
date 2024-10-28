@@ -126,6 +126,8 @@ export const router = createBrowserRouter(
           path="/department-head/incoming-requests"
           element={<IncomingRequest />}
         />
+        <Route path="/department-head/requests-Detaile" element={<RequiestDetail />} />
+
         <Route
           path="/department-head/material-request"
           element={<MaterialRequestForm />}
@@ -145,6 +147,8 @@ export const router = createBrowserRouter(
           path="/logestics/incoming-requests"
           element={<IncomingMaterialRequest />}
         />
+        <Route path="/logestics/requests-Detaile" element={<RequiestDetail />} />
+
         <Route
           path="/logestics/material-request"
           element={<MaterialRequestForm />}

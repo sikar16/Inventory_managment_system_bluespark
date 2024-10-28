@@ -12,7 +12,6 @@ const UsersList = () => {
     isLoading,
     isError,
     error,
-    isFetching,
     isSuccess,
     isUninitialized,
   } = useGetAllUsersQuery();
@@ -33,9 +32,7 @@ const UsersList = () => {
     return <div>{error.toString()}</div>;
   }
 
-  if (isFetching) {
-    return <Loader />;
-  }
+
 
   if (isUninitialized) {
     return <Loader />;
